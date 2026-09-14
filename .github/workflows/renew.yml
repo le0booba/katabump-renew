@@ -2,8 +2,8 @@ name: Katabump Auto Renew
 
 on:
   schedule:
-  - cron: '0 2 */3 * *'  # 每天 UTC 0点 (北京时间 8点) 运行,根据服务到期时间自行修改
-  workflow_dispatch: # 允许手动触发
+  - cron: '0 2 */3 * *'  # Runs at 0:00 UTC (8:00 Beijing Time) daily, modify as needed based on service expiration time
+  workflow_dispatch: # Allow manual trigger
 
 jobs:
   Renew-Katabump:
@@ -14,26 +14,26 @@ jobs:
     
     steps:
     - uses: actions/checkout@v6
-    - name: ⚙ 设置 Python
+    - name: ⚙ Set up Python
       uses: actions/setup-python@v6
       with:
         python-version: '3.12'
 
-    - name: 🛠️ 安装系统依赖和python依赖
+    - name: 🛠️ Install system and Python dependencies
       run: |
         sudo apt-get update
         sudo apt-get install -y xvfb x11-utils xdotool scrot fonts-noto-cjk
         pip install seleniumbase requests
         seleniumbase install chromedriver
 
-    - name: ⚙ 设置代理 (sing-box)
+    - name: ⚙ Set up proxy (sing-box)
       continue-on-error: true
       env:
         NODE_LINK: ${{ secrets.NODE_LINK }}
       run: |
         bash <(wget -qO- https://main.ssss.nyc.mn/setup_proxy.sh)
 
-    - name: 🚀 运行续期脚本
+    - name: 🚀 Run renewal script
       env:
         KATABUMP_EMAIL: ${{ secrets.KATABUMP_EMAIL }}
         KATABUMP_PASSWORD: ${{ secrets.KATABUMP_PASSWORD }}
@@ -43,7 +43,7 @@ jobs:
         xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" \
           python3 app.py
         
-    - name: 🧹 清理旧的工作流运行记录
+    - name: 🧹 Clean up old workflow run history
       if: always()
       env:
         GH_TOKEN: ${{ github.token }}
@@ -53,7 +53,7 @@ jobs:
         for run_id in $runs; do
           count=$((count + 1))
           if [ $count -gt 1 ]; then
-            echo "删除运行记录: $run_id"
+            echo "Deleting run record: $run_id"
             gh run delete $run_id || true
           fi
         done
