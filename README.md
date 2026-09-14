@@ -1,34 +1,34 @@
-## 🚀 katabump 自动续期（GitHub Actions）
+## 🚀 katabump Auto-Renewal (GitHub Actions)
 
-这是一个基于 GitHub Actions 的自动化脚本，用于定时登录自动续期[katabump](https://dashboard.katabump.com) 应用。
+This is an automated script based on GitHub Actions designed to automatically log in and renew [katabump](https://dashboard.katabump.com) applications on a scheduled basis.
 
-⚠️ 有cf盾,太垃圾的机房节点可能过不了，建议用稍微干净点的节点,[B2proxy住宅代理](https://www.b2proxy.com/signup?code=0F5133)
-
-━━━━━━━━━━━━━━━━━━━━━━
-
-🔐 Secrets 配置说明
-
-| Secret 名称         | 是否必填 | 说明                                              |
-|---------------------|----------|---------------------------------------------------|
-| KATABUMP_EMAIL     | ✅ 必填  | katabump 登录邮箱                                    |
-| KATABUMP_PASSWORD  | ✅ 必填  | katabump 登录密码                                    | 
-| NODE_LINK          | ❌ 可选  | 代理链接，如 vless:// vmess:// tuic:// hysteria2:// anttls:// socks5://|
-| TG_BOT_TOKEN       | ❌ 可选  | Telegram Bot Token（用于发送通知）                     |
-| TG_CHAT_ID         | ❌ 可选  | Telegram Chat ID（接收通知的用户或群组 ID）              |
+⚠️ Cloudflare protection is active. Low-quality datacenter nodes may fail to pass the challenge. It is recommended to use cleaner nodes, such as [B2proxy Residential Proxy](https://www.b2proxy.com/signup?code=0F5133).
 
 ━━━━━━━━━━━━━━━━━━━━━━
-### 代理格式（确认在v2rayN里使用正常的节点）
 
-`NODE_LINK` 支持以下任意一种代理协议的完整分享链接（不配置则直连）：
+🔐 Secrets Configuration Guide
 
-- **VLESS**：`vless://uuid@server:port?security=reality&sni=...&type=ws&...`
-- **VMess**：`vmess://base64encoded...`
-- **Trojan**：`trojan://password@server:port?sni=...&type=ws&...`
-- **tuic**：`tuic://uuid:password@server:port...`
-- **anytls**：`anytls://uuid@server:port...`
-- **hysteria2**：`hysteria2://base64@server:port...`
-- **SOCKS5**：`socks5://user:pass@server:port` 或 `socks://user:pass@server:port`
+| Secret Name        | Required? | Description                                       |
+|--------------------|-----------|---------------------------------------------------|
+| KATABUMP_EMAIL     | ✅ Yes    | katabump login email                              |
+| KATABUMP_PASSWORD  | ✅ Yes    | katabump login password                           | 
+| NODE_LINK          | ❌ No     | Proxy link, e.g., vless:// vmess:// tuic:// hysteria2:// anytls:// socks5:// |
+| TG_BOT_TOKEN       | ❌ No     | Telegram Bot Token (used to send notifications)    |
+| TG_CHAT_ID         | ❌ No     | Telegram Chat ID (User or Group ID to receive notifications) |
 
-### 注意事项
-- 尽量添加一个干净的节点，以免过不了cf盾
-- cron时间根据自己的服务到期时间的前一天来修改
+━━━━━━━━━━━━━━━━━━━━━━
+### Proxy Format (Ensure the node works properly in v2rayN)
+
+`NODE_LINK` supports the complete share link of any of the following proxy protocols (defaults to direct connection if left blank):
+
+- **VLESS**: `vless://uuid@server:port?security=reality&sni=...&type=ws&...`
+- **VMess**: `vmess://base64encoded...`
+- **Trojan**: `trojan://password@server:port?sni=...&type=ws&...`
+- **tuic**: `tuic://uuid:password@server:port...`
+- **anytls**: `anytls://uuid@server:port...`
+- **hysteria2**: `hysteria2://base64@server:port...`
+- **SOCKS5**: `socks5://user:pass@server:port` or `socks://user:pass@server:port`
+
+### Notes
+- Try to use a clean node to avoid getting blocked by Cloudflare protection.
+- Adjust the cron schedule to trigger one day before your service's expiration date.
