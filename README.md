@@ -1,3 +1,7 @@
+[![Katabump Auto Renew](https://github.com/le0booba/katabump-renew/actions/workflows/renew.yml/badge.svg)](https://github.com/le0booba/katabump-renew/actions/workflows/renew.yml)
+
+##
+
 ## 🚀 katabump Auto-Renewal (GitHub Actions)
 
 This is an automated script based on GitHub Actions designed to automatically log in and renew [katabump](https://dashboard.katabump.com) applications on a scheduled basis.
