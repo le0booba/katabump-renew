@@ -2,7 +2,7 @@ name: Katabump Auto Renew
 
 on:
   schedule:
-  - cron: '0 2 */3 * *'  # Runs at 0:00 UTC (8:00 Beijing Time) daily, modify as needed based on service expiration time
+  - cron: "0 2 */3 * *"
   workflow_dispatch: # Allow manual trigger
 
 jobs:
